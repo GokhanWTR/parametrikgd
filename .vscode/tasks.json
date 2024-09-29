@@ -1,0 +1,69 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Yeni VB Projesi Olustur",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "new",
+                "console",
+                "-lang",
+                "vb",
+                "-o",
+                "${input:projectName}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "_Build Active Project",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./${relativeFileDirname}"
+            ],
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Aktif Projeyi Calistir",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "./${relativeFileDirname}/${fileDirnameBasename}.vbproj"
+            ],
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": "_Build Active Project",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "projectName",
+            "type": "promptString",
+            "description": "Enter the project name"
+        }
+    ]
+}
